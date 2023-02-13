@@ -1,0 +1,37 @@
+.nav_cust{
+    display: block;
+    padding: 0px 7px;
+    color: #0000008c;
+    text-decoration: none;
+    margin:0px 5px;
+}
+.nav_cust:hover, .nav_cust.active_title{
+    border: solid 1px #00b2bb;
+    background: #00b2bb;
+    color: #fff;
+    border-radius: 5px;
+
+}
+
+
+
+.d-flex{
+    display: flex !important;
+}
+.ml-auto{
+    margin-left: auto !important;
+}
+.mr-auto{
+    margin-right: auto !important;
+}
+.ml-2{
+    margin-left: 10px;
+}
+
+.table_cust thead tr th{
+    font-size: 11px;
+    vertical-align: middle;
+}
+.table_cust tbody tr td{
+    font-size: 13px;
+}
