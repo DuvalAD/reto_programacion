@@ -12,6 +12,15 @@
                         @csrf
 
                         <div class="row">
+                            @if (Session::has('success'))
+                                <div class="col-md-12 mb-2">
+                                    <div class="alert alert-success alert-dismissible fade show text-uppercase" role="alert" style="padding:6px">
+                                        {{Session::get('success')}} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="padding:10px;"></button>
+                                    </div>
+                                </div>
+                            @endif
+
+                            
                             <div class="col-md-12 form-group mb-4">
                                 <label for="username" class="col-md-4 col-form-label text-bold">USUARIO</label>
                                 <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>

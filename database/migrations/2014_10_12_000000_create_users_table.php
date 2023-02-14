@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique()->nullable();;
             $table->enum('rol', ['Administrador', 'Colaborador'])->default('Colaborador');
             $table->string('name')->nullable();
+            $table->integer('status')->default(1)->nullable()->comment('1 active, 66 eliminated');
             // $table->string('email')->unique();
             // $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

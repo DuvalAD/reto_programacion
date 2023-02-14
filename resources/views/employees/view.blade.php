@@ -49,10 +49,15 @@
                     </form>
 
                     @if (Session::has('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="padding:6px">
+                        <div class="alert alert-success alert-dismissible fade show text-uppercase" role="alert" style="padding:6px">
                             {{Session::get('success')}} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="padding:10px;"></button>
                         </div>
                     @endif
+
+
+                    <div class="alert alert-warning alert-dismissible fade show text-uppercase" role="alert" style="padding:6px;font-size:11px;">
+                        El usuario y contraseña de los colaboradores es su cédula <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="padding:10px;"></button>
+                    </div>
 
                     <!-- Data -->
                     <div class="row">
@@ -81,7 +86,7 @@
                                                 <td class="text-left">{{$item->email}}</td>
                                                 <td class="text-center">{{$item->phone_number != null ? $item->phone_number : '--'}}</td>
                                                 <td class="text-center">{{$item->birth_date != null ? date('d/m/Y' , strtotime($item->birth_date)) : '--'}}</td>
-                                                <td class="text-center"><span class="badge {{$item->vaccinated == 1 ? 'bg-success' : 'bg-danger'}}">{{$item->vaccinated == 1 ? 'VACUNADO' : 'NO VACUNADO'}}</span></td>
+                                                <td class="text-center"><span class="badge {{$item->vaccinated == 1 ? 'bg-success' : 'bg-warning'}}">{{$item->vaccinated == 1 ? 'VACUNADO' : 'NO VACUNADO'}}</span></td>
                                                 <td class="text-left text-uppercase">
                                                     @if ($item->vaccinated == 1)
                                                     <div>{{$item->vaccine_name}}</div>
@@ -92,9 +97,9 @@
                                                 </td>
                                                 <td class="text-left">
                                                     <div>
-                                                        <a href="{{ route('employee.edit', ['id'=>$item->id]) }}">EDITAR</a>
+                                                        <a class="btn btn-sm btn-success w-100 p-0 mb-1" href="{{ route('employee.edit', ['id'=>$item->id]) }}">EDITAR</a>
                                                     </div>
-                                                    <a href="{{ route('employee.delete', ['id'=>$item->id]) }}" class="text-danger">ELIMINAR</a>
+                                                    <a class="btn btn-sm btn-danger w-100 p-0 mb-1" href="{{ route('employee.delete', ['id'=>$item->id]) }}" class="text-danger">ELIMINAR</a>
                                                 </td>
                                             </tr>
                                         @empty

@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Rules\ValidateIdentificationEC;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
-class EmployeeController extends Controller
-{
+class EmployeeController extends Controller{
+
     //##### LISTAR REGISTROS
     public function view(Request $request){
         if(Gate::allows('can_employee_view')){
@@ -62,14 +63,12 @@ class EmployeeController extends Controller
     //##### CREAR REGISTROS
     public function viewCreate(){
         if(Gate::allows('can_employee_create')){
-
             return view('employees.create');
         }
         return redirect()->route('home');
     }
     public function createPost(Request $request){
         if(Gate::allows('can_employee_create')){
-
             $valida = $request->validate([
                 'identificacion' => ['required', 'digits:10', 'numeric', 'unique:employees,identification'],
                 'nombres' => ['required', 'max:100', 'regex:/^[\pL\s\-]+$/u'],
@@ -108,7 +107,7 @@ class EmployeeController extends Controller
     }
     //##### EDITAR
     public function viewEdit($id){
-        if(Gate::allows('can_employee_create')){
+        if(Gate::allows('can_employee_edit')){
             $user = DB::table('employees')->where('id', $id)->first();
             if($user){
                 // dd($user);
@@ -119,8 +118,7 @@ class EmployeeController extends Controller
         return redirect()->route('home');
     }
     public function editPost(Request $request){
-        if(Gate::allows('can_employee_create')){
-
+        if(Gate::allows('can_employee_edit')){
             $valida = $request->validate([
                 'identificacion' => ['required', 'digits:10', 'numeric', 'unique:employees,identification,'.$request->employee_id],
                 'nombres' => ['required', 'max:100', 'regex:/^[\pL\s\-]+$/u'],
@@ -158,9 +156,28 @@ class EmployeeController extends Controller
 
     //##### ELIMINAR
     public function delete($id){
-        if(Gate::allows('can_employee_create')){
+        if(Gate::allows('can_employee_delete')){
+            DB::beginTransaction();
 
-            return view('employees.create');
+            try {
+                $employ = DB::table('employees')->where('id', $id)->first();
+
+                DB::table('employees')->where('id', $id)->update([
+                    'status' => 66,
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]);
+
+                DB::table('users')->where('id', $employ->user_fk)->update([
+                    'status' => 66
+                ]);
+
+                DB::commit();
+                return redirect()->route('employee.view')->with('success', "Empleado $employ->last_name $employ->first_name eliminado con éxito.");
+
+            } catch (\Throwable $th) {
+                DB::rollback();
+                throw $th;
+            }
         }
         return redirect()->route('home');
     }

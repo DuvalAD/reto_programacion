@@ -35,5 +35,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     //################# PERFIL
         Route::get('/user/profile', [ProfileController::class,'view'])->name('user.perfil.view');
+        Route::post('/user/profile/edit', [ProfileController::class,'editProfile'])->name('user.perfil.edit');
+    //==================================
+
+    //################# CAMBIO CONTRASENA
+        Route::get('/user/password', [ProfileController::class,'viewPassword'])->name('user.password.view');
+        Route::post('/user/password/edit', [ProfileController::class,'editPassword'])->name('user.password.edit');
     //==================================
 });
