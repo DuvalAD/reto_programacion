@@ -7,7 +7,7 @@
             <div class="card shadow-sm">
                 <div class="card-header">
                     <div class="d-flex">
-                        REGISTROS
+                        <div class="pt-1">EMPLEADOS</div>
                         <div class="ml-auto"><a class="btn btn-sm btn-primary" href="{{route('employee.create')}}">NUEVO EMPLEADO</a></div>
                     </div>
                 </div>
@@ -43,7 +43,9 @@
                             </div>
                             <div class="col-md-2 col-lg-2 col-sm-12">
                                 <label style="color:transparent;">btn</label>
-                                <div><button type="submit" class="w-100 btn btn-sm btn-success">BUSCAR REGISTROS</button></div>
+                                <div>
+                                    <button type="submit" class="w-100 btn btn-sm btn-success">BUSCAR</button>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -97,7 +99,7 @@
                                                 </td>
                                                 <td class="text-left">
                                                     <div>
-                                                        <a class="btn btn-sm btn-success w-100 p-0 mb-1" href="{{ route('employee.edit', ['id'=>$item->id]) }}">EDITAR</a>
+                                                        <a class="btn btn-sm btn-info w-100 p-0 mb-1 text-em" href="{{ route('employee.edit', ['id'=>$item->id]) }}"><i class="bi bi-pencil"></i> EDITAR</a>
                                                     </div>
                                                     <a class="btn btn-sm btn-danger w-100 p-0 mb-1" href="{{ route('employee.delete', ['id'=>$item->id]) }}" class="text-danger">ELIMINAR</a>
                                                 </td>
