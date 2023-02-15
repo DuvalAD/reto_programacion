@@ -7,19 +7,52 @@
 - **phpMyAdmin (cliente)**
 - **[Git](https://git-scm.com/downloads)**
 - **[GitHub](https://github.com/)**
-<!-- - **[WinRAR](https://www.winrar.es/descargas)** -->
 
 ### CLONAR EL PROYECTO
 **Antes de descargar o clonar el proyecto lo ideal es que tengamos el entorno de desarrollo listo, para esto debemos tener instalados los programas necesarios anteriormente listados.**
+
+- Para clonar el proyecto debemos utilizar **[Git](https://git-scm.com/downloads)**.
+- Abrimos la ubicación de preferencia done vayamos a clonar el repositorio (puede ser incluso en el escritorio).
+- Copiamos el link que github genera `https://github.com/DuvalAD/reto_programacion.git`.
+- y el el terminal escribimos los siguiente:
+
+```
+git clone https://github.com/DuvalAD/reto_programacion.git
+```
+Listo!! :+1: repositorio clonado.
+
 
 ## CONTRUCCIÓN Y EJECUCION
 - Abrimos el proyecto con el editor de código favorito, en mi caso utilice **[Visual Studio Code](https://code.visualstudio.com/)**.
 - Los comandos que se utilizan, se pueden ejecutar desde la consola que incluye visual studio code.
 
-### VARIABLE DE ENTORNO DEL PROYECTO (.ENV) BDD
-- Cuando hayamos abierto el proyecto buscaremos en la raiz del proyecto un archivo llamado **.env**
-- Donde se encuentra toda la configuración de la aplicación.
-- Configuración de base de datos utilizada para el proyecto`:
+### INSTALAR LAS DEPENDENCIAS DE LARAVEL USANDO COMPOSER
+- Abrimos la consola yo utilizo la consola integrada de **[Visual Studio Code](https://code.visualstudio.com/)**.
+- Ingresamos el siguiente comando (Para esto ya deberiamos tener instalado **[Composer](https://getcomposer.org/Composer-Setup.exe) en nuestra maquina).
+
+```
+composer update
+composer install
+``` 
+Este comando leerá el archivo `composer.json` y comenzara a intalar todas las dependencias.
+
+### GENERAR ARCHIVO .ENV 
+- Para generar el archiv **.env** debemos ingresar el siguiente comando en la consola:
+```
+cp .env.example .env
+```
+lo que hace el comando es hacer una copia del archivo `.env.example`. y lo nombra `.env` es donde estara la configuración para nuestro proyecto.
+
+### GENERAR UNA CLAVE DEL PROYECTO
+- Ingresamos el siguiente comando:
+```
+php artisan key:generate
+``` 
+
+### CONFIGURACIÓN DE CREDENCIALES PARA LA BASE DE DATOS EN  ARCHIVO .ENV DEL PROYECTO
+- Cuando hayamos realizado los pasos anteriores en nuestro proyecto buscaremos el archivo **.env**
+- Donde se encuentra toda la configuración de la aplicación (variables De Entorno).
+- Configuración de base de datos utilizada para el proyecto:
 ```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -53,7 +86,7 @@ Para ejecutar un seeder utilizamos el comando:
 php artisan db:seed
 ```
 
-DATOS:
+DATOS DE ACCESO AL SISTEMA:
 ```
 1.  USUARIO ADMINISTRADOR
     - USUARIO: ROOT 
